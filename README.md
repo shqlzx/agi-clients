@@ -10,6 +10,6 @@ contact us at [developers@armorgames.com​](mailto:developers@armorgames.com​
 
 ## Current Integrations
 
-- [REST v1.3](/AGI REST Doc v1-3.pdf) (PDF)
-- [JavaScript v1.1](/AGI JS Doc.md)
-- [Flash/AS3 v1.0](/AGI Flash Doc v1-0.pdf) (PDF)
+- [REST v1.3](/AGI%20REST%20Doc%20v1-3.pdf) (PDF)
+- [JavaScript v1.1](/AGI%20JS%20Doc.md)
+- [Flash/AS3 v1.0](/AGI%20Flash%20Doc%20v1-0.pdf) (PDF)
