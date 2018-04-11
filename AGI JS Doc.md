@@ -20,6 +20,9 @@
   - [retrievePurchases](#retrievepurchases)
   - [retrievePurchase](#retrievepurchasesku)
   - [consume](#consumesku-quantity)
+- [Data Objects](#data-objects)
+  - [User](#user)
+  - [Purchase](#purchase)
 
 ## Usage
 
@@ -146,7 +149,11 @@ ag.saveGame('stats_level_1', {
     score: 32,
     duration: 72
 }).then(function(response) {
-    var key = response.key;
+  // response == {
+  //   key:'stats_level_1',
+  //   success:1 // 1 saved, 0 failed
+  // }
+
 });
 ```
 
@@ -190,8 +197,16 @@ ag.showStorefront();
 ### setPurchaseHandler(callback)
 Method will be invoked when storefront is closed.
 ```javascript
-ag.setPurchaseHandler(function(payload) {
-    // payload = {sku: "2wa-product", is_consumable: false}
+ag.setPurchaseHandler(function(pEvent) {
+  // pEvent = {
+  //   "type": "cancelPurchase",
+  //   "data": null
+  // }
+  // OR
+  // pEvent = {
+  //   "type": "completePurchase",
+  //   "data": <purchase>
+  // }
 });
 ```
 
@@ -229,4 +244,78 @@ ag.consume('2wa-cookies:20', 1).then(function(response) {
     // Product "2wa-cookies:20" should be decremented by 1
     // var remaining = response.purchase.data;
 });
+```
+
+## Data Objects
+The following is an overview of the data structures returned.
+
+### User
+```javascript
+{
+  "avatar": "https://armatars.armorgames.com/armatar_471_50.50_c.png",
+  "avatar_lg": "https://armatars.armorgames.com/armatar_471_200.200_c.png",
+  "avatar_med": "https://armatars.armorgames.com/armatar_471_100.100_c.png",
+  "birthday": "0000-00-00",
+  "created_on": 1227042121,
+  "gender": "Male",
+  "premium": false,
+  "uid": "0e40633762349042f29f4394b3ac5ce8",
+  "username": "ferret"
+}
+```
+
+### Purchase
+
+An unlockable product.
+```javascript
+{
+  "product": {
+    "created_on": "2016-10-31 13:54:14",
+    "data": [],
+    "description": "Test item",
+    "display_order": 0,
+    "id": 309,
+    "media": {
+      "image": "product-images/q45YzAgUSe6DFORQVdFv_ninja.gif?v=1477950759"
+    },
+    "name":"unlockable",
+    "price":"0.99",
+    "sku":"ajt-unlockable",
+    "status":"active",
+    "type":"unlockable",
+    "updated_on":"2016-10-31 13:54:14"
+  },
+  "purchase": {
+    "data":active,
+    "success": true
+  }
+}
+```
+
+A consumable product.
+```javascript
+{
+  "product": {
+    "created_on": "2016-10-31 13:54:14",
+    "data": {
+      "consumable_qty": 1
+    },
+    "description": "Consumable item test",
+    "display_order": 0,
+    "id": 310,
+    "media": {
+      "image": "product-images/OV0cKkHkSo6SVvWxmEuR_ninja.gif?v=1477950854"
+    },
+    "name":"consumable",
+    "price":"0.99",
+    "sku":"ajt-consumable:1",
+    "status":"active",
+    "type":"consumable",
+    "updated_on":"2016-10-31 13:54:14"
+  },
+  "purchase": {
+    "data":false,
+    "success": false
+  }
+}
 ```
