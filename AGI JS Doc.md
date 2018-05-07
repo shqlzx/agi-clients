@@ -63,7 +63,7 @@ document.domain = "armorgames.com";
 	    }
 	    checkForAGI();
 	});
-());
+})();
 
 ```
 
