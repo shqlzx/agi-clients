@@ -197,16 +197,19 @@ ag.showStorefront();
 ### setPurchaseHandler(callback)
 Method will be invoked when storefront is closed.
 ```javascript
-ag.setPurchaseHandler(function(pEvent) {
-  // pEvent = {
+ag.setPurchaseHandler(function(event,event_name,payload) {
+  // event = {
   //   "type": "cancelPurchase",
   //   "data": null
   // }
   // OR
-  // pEvent = {
+  // event = {
   //   "type": "completePurchase",
   //   "data": <purchase>
   // }
+  // when type is "completePurchase", "payload" is either:
+  // unlockable = {sku: "2wa-product", is_consumable: false}
+  // consumable = {sku: "ajt-consumable:1", is_consumable: true, sku_base: "ajt-consumable", purchase_quantity: "1"}
 });
 ```
 
