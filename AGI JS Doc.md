@@ -2,7 +2,7 @@
 
 # Armor Games Javascript AGI
 
-*Version 1.1*
+*Version 0.3.1*
 
 - [Usage](#usage)
   - [Notes](#notes)
@@ -20,13 +20,13 @@
   - [retrievePurchases](#retrievepurchases)
   - [retrievePurchase](#retrievepurchasesku)
   - [consume](#consumesku-quantity)
+- [Quest Methods](#quest-methods)
+  - [retrieveQuests](#retrievequests)
+  - [submitQuest](#submitquest)
+  - [resetQuest](#resetquest)
 - [Data Objects](#data-objects)
   - [User](#user)
   - [Purchase](#purchase)
-- [Quest Method](#quest-methods)
-  - [retrieveQuests](#retrieve-quests)
-  - [submitQuest](#submit-quest)
-  - [resetQuest](#reset-quest)
 
 ## Usage
 
@@ -253,6 +253,33 @@ ag.consume('2wa-cookies:20', 1).then(function(response) {
 });
 ```
 
+## Quest Methods
+How to have your game interact with the Armor Games quest system.  Before your quests can be awarded, you need to contact Armor Games to have us create a quest for you on our backend.
+
+#### retrieveQuests()
+This will return an array of objects that list all the quests for the game and the player's current progress for each quest.  Fields for each object: percent_complete, current_value, state, completed_date, developer_id
+```javascript
+ag.retrieveQuests().then(function(response) {
+    // Response should be an array of objects
+});
+```
+
+#### submitQuest(developer_id, progress)
+Submit quest progress for the user.  Progress is a value from 0.0 to 1.0, with 1.0 being 100% complete.
+```javascript
+ag.submitQuest('quest-developer-id',0.1).then(function(response) {
+    // response = {state,current_value,percent_complete,developer_id,score_awarded,already_completed,completed_date}
+});
+```
+
+#### resetQuest(developer_id)
+Resets a quest's progress back to zero.
+```javascript
+ag.resetQuest('test_quest').then(function(response) {
+    // response = {state,current_value,percent_complete,developer_id,score_awarded,already_completed,completed_date}
+});
+```
+
 ## Data Objects
 The following is an overview of the data structures returned.
 
@@ -325,31 +352,4 @@ A consumable product.
     "success": false
   }
 }
-```
-
-## Quests
-How to have your game interact with the Armor Games quest system.  Before your quests can be awarded, you need to contact Armor Games to have us create a quest for you on our backend.
-
-#### retrieveQuests()
-This will return an array of objects that list all the quests for the game and the player's current progress for each quest.  Fields for each object: percent_complete, current_value, state, completed_date, developer_id
-```javascript
-ag.retrieveQuests().then(function(response) {
-    // Response should be an array of objects
-});
-```
-
-#### submitQuest(developer_id, progress)
-Submit quest progress for the user.  Progress is a value from 0.0 to 1.0, with 1.0 being 100% complete.
-```javascript
-ag.submitQuest('quest-developer-id',0.1).then(function(response) {
-    // response = {state,current_value,percent_complete,developer_id,score_awarded,already_completed,completed_date}
-});
-```
-
-#### resetQuest(developer_id)
-Resets a quest's progress back to zero.
-```javascript
-ag.resetQuest('test_quest').then(function(response) {
-    // response = {state,current_value,percent_complete,developer_id,score_awarded,already_completed,completed_date}
-});
 ```
