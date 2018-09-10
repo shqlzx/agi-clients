@@ -9,4 +9,4 @@ integration types, their specific feature sets, and implementation documentation
 If there are any questions or issues please contact us at [developers@armorgames.com​](mailto:developers@armorgames.com​).
 
 
-[https://armorgames.readme.io/v1.0/docs/getting-started](Official Armor Games API/AGI Documentation)
+[Official Armor Games API (AGI) Documentation](https://armorgames.readme.io/v1.0/docs/getting-started)
